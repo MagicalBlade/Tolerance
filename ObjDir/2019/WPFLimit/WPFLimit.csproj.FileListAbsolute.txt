@@ -1,0 +1,15 @@
+F:\C#\Project\WPFLimit\WPFLimit\bin\Debug\WPFLimit.exe.config
+F:\C#\Project\WPFLimit\WPFLimit\bin\Debug\WPFLimit.exe
+F:\C#\Project\WPFLimit\WPFLimit\bin\Debug\WPFLimit.pdb
+F:\C#\Project\WPFLimit\ObjDir\2019\WPFLimit\WPFLimit.csproj.AssemblyReference.cache
+F:\C#\Project\WPFLimit\ObjDir\2019\WPFLimit\MainWindow.g.cs
+F:\C#\Project\WPFLimit\ObjDir\2019\WPFLimit\App.g.cs
+F:\C#\Project\WPFLimit\ObjDir\2019\WPFLimit\WPFLimit_MarkupCompile.cache
+F:\C#\Project\WPFLimit\ObjDir\2019\WPFLimit\WPFLimit_MarkupCompile.lref
+F:\C#\Project\WPFLimit\ObjDir\2019\WPFLimit\MainWindow.baml
+F:\C#\Project\WPFLimit\ObjDir\2019\WPFLimit\WPFLimit.g.resources
+F:\C#\Project\WPFLimit\ObjDir\2019\WPFLimit\WPFLimit.Properties.Resources.resources
+F:\C#\Project\WPFLimit\ObjDir\2019\WPFLimit\WPFLimit.csproj.GenerateResource.cache
+F:\C#\Project\WPFLimit\ObjDir\2019\WPFLimit\WPFLimit.csproj.CoreCompileInputs.cache
+F:\C#\Project\WPFLimit\ObjDir\2019\WPFLimit\WPFLimit.exe
+F:\C#\Project\WPFLimit\ObjDir\2019\WPFLimit\WPFLimit.pdb
