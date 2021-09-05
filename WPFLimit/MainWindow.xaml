@@ -5,11 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFLimit"
         mc:Ignorable="d"
-        Title="MainWindow" Height="197" Width="200" Loaded="Window_Loaded" ResizeMode="NoResize" FontFamily="GOST type A" Topmost="True">
+        Title="MainWindow" Height="197" Width="200" Loaded="Window_Loaded" ResizeMode="NoResize" FontFamily="GOST type A" Topmost="True" Activated="Window_Activated">
     <Grid>
-        <Button x:Name="b_limit" Content="Допуск" HorizontalAlignment="Left" Margin="58,130,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
-        <TextBox x:Name="tb_limit_up" HorizontalAlignment="Left" Height="23" Margin="34,35,0,0" TextWrapping="Wrap" Text="up" VerticalAlignment="Top" Width="120" FontSize="16" GotFocus="tb_limit_up_GotFocus"/>
-        <TextBox x:Name="tb_limit_down" HorizontalAlignment="Left" Height="23" Margin="34,76,0,0" TextWrapping="Wrap" Text="down" VerticalAlignment="Top" Width="120" TouchEnter="Button_Click" FontSize="16" GotFocus="tb_limit_down_GotFocus"/>
+        <Button x:Name="b_limit" Content="Допуск" HorizontalAlignment="Left" Margin="58,130,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click" KeyDown="b_limit_KeyDown"/>
+        <TextBox x:Name="tb_limit_up" HorizontalAlignment="Left" Height="23" Margin="34,35,0,0" TextWrapping="Wrap" Text="up" VerticalAlignment="Top" Width="120" FontSize="16" GotFocus="tb_limit_up_GotFocus" KeyDown="tb_limit_up_KeyDown"/>
+        <TextBox x:Name="tb_limit_down" HorizontalAlignment="Left" Height="23" Margin="34,76,0,0" TextWrapping="Wrap" Text="down" VerticalAlignment="Top" Width="120" TouchEnter="Button_Click" FontSize="16" GotFocus="tb_limit_down_GotFocus" KeyDown="tb_limit_down_KeyDown"/>
 
     </Grid>
 </Window>

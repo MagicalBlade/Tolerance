@@ -16,6 +16,7 @@ using TSM = Tekla.Structures.Model;
 using TSD = Tekla.Structures.Drawing;
 using System.Collections;
 
+
 namespace WPFLimit
 {
     /// <summary>
@@ -90,6 +91,7 @@ namespace WPFLimit
         {
             TSD.StraightDimension.StraightDimensionAttributes straightDimensionAttributes = new TSD.StraightDimension.StraightDimensionAttributes();
             TSD.ContainerElement containerElement = new TSD.ContainerElement();
+            TSD.ContainerElement cE_return = new TSD.ContainerElement();
             TSD.NewLineElement newLineElement = new TSD.NewLineElement();
             TSD.FontAttributes fontAttributes = new TSD.FontAttributes
             {
@@ -97,27 +99,44 @@ namespace WPFLimit
                 Height = 3.5,
                 Color = TSD.DrawingColors.NewLine1
             };
-            if (tb_limit_up.Text.Remove(0, 1) == tb_limit_down.Text.Remove(0, 1) && tb_limit_up.Text[0] != tb_limit_down.Text[0])
+            if (tb_limit_up.Text == "0")
             {
-                TSD.TextElement textElement = new TSD.TextElement("±" + tb_limit_up.Text.Remove(0, 1), fontAttributes);
-                containerElement.Add(null);
-                containerElement.Add(null);
+                tb_limit_up.Text = " 0";
+            }
+            if (tb_limit_down.Text == "0")
+            {
+                tb_limit_down.Text = " 0";
+            }
+            if (tb_limit_up.Text.IndexOf("+") != -1 && tb_limit_down.Text.IndexOf("-") != -1 && tb_limit_up.Text[0] != tb_limit_down.Text[0])
+            {
+                TSD.TextElement textElement = new TSD.TextElement("±" + tb_limit_up.Text.Replace("+",""), fontAttributes);
+                containerElement.Add(cE_return);
+                containerElement.Add(cE_return);
+                containerElement.Add(cE_return);
                 containerElement.Add(textElement);
             }
             else
             {
-                TSD.TextElement textElement = new TSD.TextElement(tb_limit_up.Text, fontAttributes);
-                TSD.TextElement textElement2 = new TSD.TextElement(tb_limit_down.Text, fontAttributes);
-                containerElement.Add(null);
-                containerElement.Add(null);
-                containerElement.Add(textElement);
-                containerElement.Add(newLineElement);
-                containerElement.Add(null);
-                containerElement.Add(null);
-                containerElement.Add(textElement2);
+                if (tb_limit_up.Text != "")
+                {
+                    TSD.TextElement textElement = new TSD.TextElement(tb_limit_up.Text + " ", fontAttributes);
+                    containerElement.Add(cE_return);
+                    containerElement.Add(cE_return);
+                    containerElement.Add(cE_return);
+                    containerElement.Add(textElement);
+                    containerElement.Add(newLineElement);
+                }
+                if (tb_limit_down.Text != "")
+                {
+                    TSD.TextElement textElement2 = new TSD.TextElement(tb_limit_down.Text + " ", fontAttributes);
+                    containerElement.Add(cE_return);
+                    containerElement.Add(cE_return);
+                    containerElement.Add(cE_return);
+                    containerElement.Add(textElement2);
+                }
             }
 
-
+            //MessageBox.Show(straightDimension.Attributes.DimensionValuePostfix.GetUnformattedString());
             //IEnumerator straightDimensionIE = straightDimension.Attributes.DimensionValuePostfix.GetEnumerator();
             //while (straightDimensionIE.MoveNext())
             //    MessageBox.Show(straightDimensionIE.Current.ToString());
@@ -138,6 +157,33 @@ namespace WPFLimit
             tb_limit_down.SelectAll();
         }
 
+        private void tb_limit_up_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                tb_limit_down.Focus();
+            }
+        }
 
+        private void tb_limit_down_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                b_limit.Focus();
+            }
+        }
+
+        private void b_limit_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                tb_limit_up.Focus();
+            }
+        }
+
+        private void Window_Activated(object sender, EventArgs e)
+        {
+            tb_limit_up.Focus();
+        }
     }
 }
