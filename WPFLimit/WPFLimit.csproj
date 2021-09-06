@@ -51,11 +51,11 @@
     </Reference>
     <Reference Include="Tekla.Structures.Drawing, Version=2020.0.0.0, Culture=neutral, PublicKeyToken=2f04dbe497b71114, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>D:\Program Files\Tekla Structures\2020.0\nt\bin\plugins\Tekla.Structures.Drawing.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Program Files\Tekla Structures\2019.1\nt\bin\plugins\Tekla.Structures.Drawing.dll</HintPath>
     </Reference>
     <Reference Include="Tekla.Structures.Model, Version=2020.0.0.0, Culture=neutral, PublicKeyToken=2f04dbe497b71114, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>D:\Program Files\Tekla Structures\2020.0\nt\bin\plugins\Tekla.Structures.Model.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Program Files\Tekla Structures\2019.1\nt\bin\plugins\Tekla.Structures.Model.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
@@ -104,6 +104,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="plus_minus-48_44524.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
