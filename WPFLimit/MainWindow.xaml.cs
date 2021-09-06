@@ -107,7 +107,7 @@ namespace WPFLimit
             {
                 tb_limit_down.Text = " 0";
             }
-            if (tb_limit_up.Text.IndexOf("+") != -1 && tb_limit_down.Text.IndexOf("-") != -1 && tb_limit_up.Text[0] != tb_limit_down.Text[0])
+            if (tb_limit_up.Text.IndexOf("+") != -1 && tb_limit_down.Text.IndexOf("-") != -1 && tb_limit_up.Text.Replace("+", "") == tb_limit_down.Text.Replace("-", ""))
             {
                 TSD.TextElement textElement = new TSD.TextElement("±" + tb_limit_up.Text.Replace("+",""), fontAttributes);
                 containerElement.Add(cE_return);
@@ -189,6 +189,20 @@ namespace WPFLimit
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             this.DragMove();
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            if (!w_main.Topmost)
+            {
+                w_main.Topmost = true;
+                ImageSource image = ; 
+                i_Topmost = image;
+            }
+            else
+            {
+                w_main.Topmost = false;
+            }
         }
     }
 }

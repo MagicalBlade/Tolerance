@@ -5,6 +5,11 @@ VisualStudioVersion = 16.0.31321.278
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFLimit", "WPFLimit\WPFLimit.csproj", "{3E4FE385-9311-4421-B53A-31F9C5B0D8E2}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{AD214140-4E68-4974-B3EC-4F2417A13574}"
+	ProjectSection(SolutionItems) = preProject
+		WPFLimit\Image.Second.png = WPFLimit\Image.Second.png
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

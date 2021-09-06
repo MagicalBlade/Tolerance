@@ -1,16 +1,23 @@
-﻿<Window x:Class="WPFLimit.MainWindow"
+﻿<Window x:Name="w_main" x:Class="WPFLimit.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFLimit"
-        mc:Ignorable="d" Height="197" Width="200" Loaded="Window_Loaded" ResizeMode="CanMinimize" FontFamily="GOST type A" Topmost="True" Activated="Window_Activated" Icon="plus_minus-48_44524.png" MouseLeftButtonDown="Window_MouseLeftButtonDown">
+        mc:Ignorable="d" Height="197" Width="200" Loaded="Window_Loaded" ResizeMode="CanMinimize" FontFamily="GOST type A" Activated="Window_Activated" Icon="plus_minus-48_44524.png" MouseLeftButtonDown="Window_MouseLeftButtonDown">
+    <Window.Resources>
+        <Image x:Key="Image.First" Source="plus_minus-48_44524.png"/>
+        <Image x:Key="Image.Second" Source="Image.Second.jpg"/>
+    </Window.Resources>
     <Grid>
         <Button x:Name="b_limit" Content="Допуск" Margin="50,119,50,0" VerticalAlignment="Top" Click="Button_Click" KeyDown="b_limit_KeyDown" RenderTransformOrigin="0.504,0.229"/>
         <TextBox x:Name="tb_limit_up" Height="23" Margin="50,34,50,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" GotFocus="tb_limit_up_GotFocus" KeyDown="tb_limit_up_KeyDown" FontFamily="GOST type A Standard"/>
         <TextBox x:Name="tb_limit_down" Height="23" Margin="50,74,50,0" TextWrapping="Wrap" VerticalAlignment="Top" TouchEnter="Button_Click" FontSize="16" GotFocus="tb_limit_down_GotFocus" KeyDown="tb_limit_down_KeyDown" FontFamily="GOST type A Standard"/>
         <Label Content="Верх" HorizontalAlignment="Left" Margin="16,34,0,0" VerticalAlignment="Top" FontSize="14" Height="23"/>
         <Label Content="Низ" HorizontalAlignment="Left" Margin="16,74,0,0" VerticalAlignment="Top" Width="29" FontSize="14" Height="23"/>
+        <Button x:Name="b_Topmost" HorizontalAlignment="Left" Margin="86,141,0,0" VerticalAlignment="Top" Width="22" RenderTransformOrigin="1,0" Click="Button_Click_1">
+            <Image x:Name="i_Topmost" Source="plus_minus-48_44524.png"/>
+        </Button>
 
     </Grid>
 </Window>
