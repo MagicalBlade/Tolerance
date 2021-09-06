@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFLimit"
-        mc:Ignorable="d" Height="197" Width="200" Loaded="Window_Loaded" ResizeMode="CanMinimize" FontFamily="GOST type A" Topmost="True" Activated="Window_Activated" Icon="plus_minus-48_44524.png">
+        mc:Ignorable="d" Height="197" Width="200" Loaded="Window_Loaded" ResizeMode="CanMinimize" FontFamily="GOST type A" Topmost="True" Activated="Window_Activated" Icon="plus_minus-48_44524.png" MouseLeftButtonDown="Window_MouseLeftButtonDown">
     <Grid>
         <Button x:Name="b_limit" Content="Допуск" Margin="50,119,50,0" VerticalAlignment="Top" Click="Button_Click" KeyDown="b_limit_KeyDown" RenderTransformOrigin="0.504,0.229"/>
         <TextBox x:Name="tb_limit_up" Height="23" Margin="50,34,50,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" GotFocus="tb_limit_up_GotFocus" KeyDown="tb_limit_up_KeyDown" FontFamily="GOST type A Standard"/>
