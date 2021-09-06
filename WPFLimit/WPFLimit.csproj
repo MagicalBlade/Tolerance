@@ -108,5 +108,9 @@
   <ItemGroup>
     <Resource Include="plus_minus-48_44524.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="открепить.png" />
+    <Resource Include="прикрепить.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

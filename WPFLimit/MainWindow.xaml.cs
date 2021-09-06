@@ -196,12 +196,12 @@ namespace WPFLimit
             if (!w_main.Topmost)
             {
                 w_main.Topmost = true;
-                ImageSource image = ; 
-                i_Topmost = image;
+                b_Topmost.Content = Resources["Image.Second"];
             }
             else
             {
                 w_main.Topmost = false;
+                b_Topmost.Content = Resources["Image.First"];
             }
         }
     }
