@@ -158,10 +158,10 @@ namespace WPFLimit
                 }
             }
 
-            MessageBox.Show(straightDimension.Attributes.DimensionValuePostfix.GetUnformattedString());
-            IEnumerator straightDimensionIE = straightDimension.Attributes.DimensionValuePostfix.GetEnumerator();
-            while (straightDimensionIE.MoveNext())
-                MessageBox.Show(straightDimensionIE.Current.ToString());
+            //MessageBox.Show(straightDimension.Attributes.DimensionValuePostfix.GetUnformattedString());
+            //IEnumerator straightDimensionIE = straightDimension.Attributes.DimensionValuePostfix.GetEnumerator();
+            //while (straightDimensionIE.MoveNext())
+            //    MessageBox.Show(straightDimensionIE.Current.ToString());
             straightDimensionAttributes = straightDimension.Attributes;
             straightDimensionAttributes.DimensionValuePostfix = containerElement;
             straightDimension.Attributes = straightDimensionAttributes;
