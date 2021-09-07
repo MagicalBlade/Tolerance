@@ -25,8 +25,9 @@ namespace WPFLimit
     public partial class MainWindow : Window
     {
         TSM.Model model;
-        TSD.DrawingHandler drawingHandler = new TSD.DrawingHandler();
+        TSD.DrawingHandler drawingHandler;
 
+        
         public MainWindow()
         {
             InitializeComponent();
@@ -45,6 +46,20 @@ namespace WPFLimit
             }
         }
 
+        private bool InitializeDrawing()
+        {
+            TSD.DrawingHandler _drawingHandler = new TSD.DrawingHandler();
+            if (_drawingHandler.GetActiveDrawing()!=null)
+            {
+                drawingHandler = _drawingHandler;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             if(!InitializeConnection())
@@ -53,12 +68,19 @@ namespace WPFLimit
                 this.Close();
             }
 
+
         }
 
 
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            if (!InitializeDrawing())
+            {
+                MessageBox.Show("Чертеж не запущен :(");
+                return;
+            }
+
             TSD.Drawing drawing = drawingHandler.GetActiveDrawing();
             foreach (TSD.DrawingObject drawingObject in drawingHandler.GetDrawingObjectSelector().GetSelected())
             {
@@ -136,11 +158,10 @@ namespace WPFLimit
                 }
             }
 
-            //MessageBox.Show(straightDimension.Attributes.DimensionValuePostfix.GetUnformattedString());
-            //IEnumerator straightDimensionIE = straightDimension.Attributes.DimensionValuePostfix.GetEnumerator();
-            //while (straightDimensionIE.MoveNext())
-            //    MessageBox.Show(straightDimensionIE.Current.ToString());
-
+            MessageBox.Show(straightDimension.Attributes.DimensionValuePostfix.GetUnformattedString());
+            IEnumerator straightDimensionIE = straightDimension.Attributes.DimensionValuePostfix.GetEnumerator();
+            while (straightDimensionIE.MoveNext())
+                MessageBox.Show(straightDimensionIE.Current.ToString());
             straightDimensionAttributes = straightDimension.Attributes;
             straightDimensionAttributes.DimensionValuePostfix = containerElement;
             straightDimension.Attributes = straightDimensionAttributes;
