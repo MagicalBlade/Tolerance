@@ -94,7 +94,6 @@ namespace WPFLimit
                 if (drawingObject is TSD.StraightDimensionSet)
                 {
                     TSD.StraightDimensionSet straightDimensionSet = drawingObject as TSD.StraightDimensionSet;
-                    TSD.StraightDimensionSet.StraightDimensionSetAttributes straightDimensionSetAttributes = new TSD.StraightDimensionSet.StraightDimensionSetAttributes();
                     TSD.DrawingObjectEnumerator drawingObjectEnumerator = straightDimensionSet.GetObjects();
                     while (drawingObjectEnumerator.MoveNext())
                         if (drawingObjectEnumerator.Current is TSD.StraightDimension)
@@ -164,10 +163,10 @@ namespace WPFLimit
                     containerElement.Add(textElement2);
                 }
             }
-            //MessageBox.Show(straightDimension.Attributes.DimensionValuePostfix.GetUnformattedString());
-            //IEnumerator straightDimensionIE = straightDimension.Attributes.DimensionValuePostfix.GetEnumerator();
-            //while (straightDimensionIE.MoveNext())
-            //    MessageBox.Show(straightDimensionIE.Current.ToString());
+            MessageBox.Show(straightDimension.Attributes.DimensionValuePostfix.GetUnformattedString());
+            IEnumerator straightDimensionIE = straightDimension.Attributes.DimensionValuePostfix.GetEnumerator();
+            while (straightDimensionIE.MoveNext())
+                MessageBox.Show(straightDimensionIE.Current.ToString());
             straightDimension.Attributes.DimensionValuePostfix.Clear();
             straightDimension.Attributes.DimensionValuePostfix.Add(containerElement);
             straightDimension.Modify();
