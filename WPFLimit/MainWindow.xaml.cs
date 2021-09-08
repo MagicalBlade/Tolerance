@@ -26,7 +26,7 @@ namespace WPFLimit
     {
         TSM.Model model;
         TSD.DrawingHandler drawingHandler;
-
+        
         
         public MainWindow()
         {
@@ -111,7 +111,6 @@ namespace WPFLimit
 
        private void Prefix(TSD.StraightDimension straightDimension)
         {
-            TSD.StraightDimension.StraightDimensionAttributes straightDimensionAttributes = new TSD.StraightDimension.StraightDimensionAttributes();
             TSD.ContainerElement containerElement = new TSD.ContainerElement();
             TSD.ContainerElement cE_return = new TSD.ContainerElement();
             TSD.NewLineElement newLineElement = new TSD.NewLineElement();
@@ -128,6 +127,14 @@ namespace WPFLimit
             if (tb_limit_down.Text == "0")
             {
                 tb_limit_down.Text = " 0";
+            }
+            if (tb_limit_up.Text.IndexOf("+") != -1 && tb_limit_down.Text == "")
+            {
+                tb_limit_down.Text = " 0";
+            }
+            if (tb_limit_down.Text.IndexOf("-") != -1 && tb_limit_up.Text == "")
+            {
+                tb_limit_up.Text = " 0";
             }
             if (tb_limit_up.Text.IndexOf("+") != -1 && tb_limit_down.Text.IndexOf("-") != -1 && tb_limit_up.Text.Replace("+", "") == tb_limit_down.Text.Replace("-", ""))
             {
@@ -157,15 +164,15 @@ namespace WPFLimit
                     containerElement.Add(textElement2);
                 }
             }
-
             //MessageBox.Show(straightDimension.Attributes.DimensionValuePostfix.GetUnformattedString());
             //IEnumerator straightDimensionIE = straightDimension.Attributes.DimensionValuePostfix.GetEnumerator();
             //while (straightDimensionIE.MoveNext())
             //    MessageBox.Show(straightDimensionIE.Current.ToString());
-            straightDimensionAttributes = straightDimension.Attributes;
-            straightDimensionAttributes.DimensionValuePostfix = containerElement;
-            straightDimension.Attributes = straightDimensionAttributes;
+            straightDimension.Attributes.DimensionValuePostfix.Clear();
+            straightDimension.Attributes.DimensionValuePostfix.Add(containerElement);
             straightDimension.Modify();
+            
+
         }
 
         private void tb_limit_up_GotFocus(object sender, RoutedEventArgs e)
