@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Xml.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -15,7 +15,9 @@ using System.Windows.Shapes;
 using TSM = Tekla.Structures.Model;
 using TSD = Tekla.Structures.Drawing;
 using System.Collections;
-
+using System.IO;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace WPFLimit
 {
@@ -31,6 +33,24 @@ namespace WPFLimit
         public MainWindow()
         {
             InitializeComponent();
+            load();
+        }
+
+        private void load()
+        {
+            XDocument xdoc = XDocument.Load("save.xml");
+            w_main.Topmost = (bool)xdoc.Element("setting").Element("Поверх_окон");
+            w_main.Left = (double)xdoc.Element("setting").Element("Лево");
+            w_main.Top = (double)xdoc.Element("setting").Element("Верх");
+
+            if (w_main.Topmost)
+            {
+                b_Topmost.Content = Resources["Image.Second"];
+            }
+            else
+            {
+                b_Topmost.Content = Resources["Image.First"];
+            }
         }
         private bool InitializeConnection()
         {
@@ -62,17 +82,12 @@ namespace WPFLimit
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            if(!InitializeConnection())
+            if (!InitializeConnection())
             {
                 MessageBox.Show("Нет конекта к модели :(");
                 this.Close();
             }
-
-
         }
-
-
-
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             if (!InitializeDrawing())
@@ -88,7 +103,7 @@ namespace WPFLimit
                 if (drawingObject is TSD.StraightDimension)
                 {
                     TSD.StraightDimension straightDimension = drawingObject as TSD.StraightDimension;
-                    Prefix(straightDimension);
+                    Prefix(straightDimension, drawing);
                 }
 
                 if (drawingObject is TSD.StraightDimensionSet)
@@ -99,16 +114,13 @@ namespace WPFLimit
                         if (drawingObjectEnumerator.Current is TSD.StraightDimension)
                         {
                             TSD.StraightDimension straightDimension = drawingObjectEnumerator.Current as TSD.StraightDimension;
-                            Prefix(straightDimension);
+                            Prefix(straightDimension, drawing);
                         }
                 }
             }
             drawing.CommitChanges();
-
-
         }
-
-       private void Prefix(TSD.StraightDimension straightDimension)
+       private void Prefix(TSD.StraightDimension straightDimension, TSD.Drawing drawing)
         {
             TSD.ContainerElement containerElement = new TSD.ContainerElement();
             TSD.ContainerElement cE_return = new TSD.ContainerElement();
@@ -163,15 +175,9 @@ namespace WPFLimit
                     containerElement.Add(textElement2);
                 }
             }
-            MessageBox.Show(straightDimension.Attributes.DimensionValuePostfix.GetUnformattedString());
-            IEnumerator straightDimensionIE = straightDimension.Attributes.DimensionValuePostfix.GetEnumerator();
-            while (straightDimensionIE.MoveNext())
-                MessageBox.Show(straightDimensionIE.Current.ToString());
             straightDimension.Attributes.DimensionValuePostfix.Clear();
             straightDimension.Attributes.DimensionValuePostfix.Add(containerElement);
             straightDimension.Modify();
-            
-
         }
 
         private void tb_limit_up_GotFocus(object sender, RoutedEventArgs e)
@@ -230,6 +236,27 @@ namespace WPFLimit
                 w_main.Topmost = false;
                 b_Topmost.Content = Resources["Image.First"];
             }
+        }
+
+        private void w_main_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            //var options = new JsonSerializerOptions
+            //{
+            //    WriteIndented = true,
+            //};
+            //ArrayList json_save = new ArrayList()
+            //{
+            //    w_main.Topmost,
+            //    w_main.Left,
+            //    w_main.Top
+            //};
+            //File.WriteAllText("user.json", JsonSerializer.Serialize(json_save, options));
+
+            XDocument xdoc = new XDocument(new XElement("setting",
+                new XElement("Поверх_окон", w_main.Topmost),
+                new XElement("Лево", w_main.Left),
+                new XElement("Верх", w_main.Top)));
+            xdoc.Save("save.xml");
         }
     }
 }

@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFLimit"
-        mc:Ignorable="d" Height="197" Width="200" Loaded="Window_Loaded" ResizeMode="CanMinimize" FontFamily="GOST type A" Activated="Window_Activated" Icon="plus_minus-48_44524.png" MouseLeftButtonDown="Window_MouseLeftButtonDown">
+        mc:Ignorable="d" Height="197" Width="200" Loaded="Window_Loaded" ResizeMode="CanMinimize" FontFamily="GOST type A" Activated="Window_Activated" Icon="plus_minus-48_44524.png" MouseLeftButtonDown="Window_MouseLeftButtonDown" Closing="w_main_Closing">
     <Window.Resources>
         <Image x:Key="Image.First" Source="открепить.png"/>
         <Image x:Key="Image.Second" Source="прикрепить.png"/>
