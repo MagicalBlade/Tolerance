@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <Поверх_окон>true</Поверх_окон>
+  <Лево>1349</Лево>
+  <Верх>137</Верх>
+  <ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <string>2; </string>
+    <string>++1; -2</string>
+    <string>+1; -2</string>
+  </ArrayOfString>
+</setting>

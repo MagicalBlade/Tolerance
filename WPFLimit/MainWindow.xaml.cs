@@ -49,16 +49,14 @@ namespace WPFLimit
             XmlSerializer formatter = new XmlSerializer(typeof(List<string>));
             List<string> f_temp = (List<string>)formatter.Deserialize(xdoc.Element("setting").Element("ArrayOfString").CreateReader());
             save = f_temp;
-            //using (FileStream fs = new FileStream("save.xml", FileMode.OpenOrCreate))
-            //{
-            //    List<string> d_temp = (List<string>)formatter.Deserialize(fs);
-            //    save = d_temp;
-            //}
+
+            //MessageBox.Show(save.Remove("2; ").ToString());
+
+
             foreach (var item in save)
             {
                 lb_save.Items.Add(StackPanel(item, b_delete_Click));
             }
-
 
             if (w_main.Topmost)
             {
@@ -301,7 +299,6 @@ namespace WPFLimit
             }
             xdoc.Root.Add(xdoc1.Root);
             xdoc.Save("save.xml");
-
         }
 
         private void lb_history_MouseDoubleClick(object sender, MouseButtonEventArgs e)
