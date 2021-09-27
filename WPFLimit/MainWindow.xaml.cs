@@ -318,17 +318,18 @@ namespace WPFLimit
             lb_save.Items.Add(SP_add(button.Tag.ToString(), b_delete_Click));
             save.Add(button.Tag.ToString());
         }
-        private void b_delete_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("delete");
-        }
-
         private void lb_save_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             string[] temp = save[lb_save.SelectedIndex].Split(';');
             tb_limit_up.Text = temp[0].Trim();
             tb_limit_down.Text = temp[1].Trim();
             StraightDimension();
+        }
+        private void b_delete_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = sender as Button;
+            lb_save.Items.Remove(button.Parent);
+            save.Remove(button.Tag.ToString());
         }
     }
 }
