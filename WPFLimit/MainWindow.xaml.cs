@@ -32,6 +32,7 @@ namespace WPFLimit
         TSM.Model model;
         TSD.DrawingHandler drawingHandler;
         List<String> save = new List<string>();
+        List<String> history = new List<string>();
         public MainWindow()
         {
             List<string> save = new List<string>();
@@ -55,7 +56,7 @@ namespace WPFLimit
 
             foreach (var item in save)
             {
-                lb_save.Items.Add(StackPanel(item, b_delete_Click));
+                lb_save.Items.Add(SP_add(item, b_delete_Click));
             }
 
             if (w_main.Topmost)
@@ -114,13 +115,15 @@ namespace WPFLimit
 
             if (lb_history.Items.Count == 0)
             {
-                lb_history.Items.Add(StackPanel(tb_limit_up.Text + "; " + tb_limit_down.Text, b_save_Click));
+                history.Add(tb_limit_up.Text + "; " + tb_limit_down.Text);
+                lb_history.Items.Add(SP_add(tb_limit_up.Text + "; " + tb_limit_down.Text, b_save_Click));
             }
             else
             {
-                if (lb_history.Items[lb_history.Items.Count - 1].ToString() != (tb_limit_up.Text + "; " + tb_limit_down.Text))
+                if (history.IndexOf(tb_limit_up.Text + "; " + tb_limit_down.Text) == -1)
                 {
-                    lb_history.Items.Add(StackPanel(tb_limit_up.Text + "; " + tb_limit_down.Text, b_save_Click));
+                    history.Add(tb_limit_up.Text + "; " + tb_limit_down.Text);
+                    lb_history.Items.Add(SP_add(tb_limit_up.Text + "; " + tb_limit_down.Text, b_save_Click));
                 }
             }
         }
@@ -210,7 +213,7 @@ namespace WPFLimit
             straightDimension.Modify();
         }
 
-        private StackPanel StackPanel(string text, RoutedEventHandler routedEventHandler)
+        private StackPanel SP_add(string text, RoutedEventHandler routedEventHandler)
         {
             Button b_save = new Button();
             Label l_save = new Label();
@@ -303,9 +306,7 @@ namespace WPFLimit
 
         private void lb_history_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            StackPanel stackPanel = lb_history.SelectedItem as StackPanel;
-            Label label = stackPanel.Children[1] as Label;
-            string[] temp = label.Content.ToString().Split(';');
+            string[] temp = history[lb_history.SelectedIndex].Split(';');
             tb_limit_up.Text = temp[0].Trim();
             tb_limit_down.Text = temp[1].Trim();
             StraightDimension();
@@ -314,7 +315,7 @@ namespace WPFLimit
         private void b_save_Click(object sender, RoutedEventArgs e)
         {
             Button button = sender as Button;
-            lb_save.Items.Add(StackPanel(button.Tag.ToString(), b_delete_Click));
+            lb_save.Items.Add(SP_add(button.Tag.ToString(), b_delete_Click));
             save.Add(button.Tag.ToString());
         }
         private void b_delete_Click(object sender, RoutedEventArgs e)
@@ -324,7 +325,10 @@ namespace WPFLimit
 
         private void lb_save_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            
+            string[] temp = save[lb_save.SelectedIndex].Split(';');
+            tb_limit_up.Text = temp[0].Trim();
+            tb_limit_down.Text = temp[1].Trim();
+            StraightDimension();
         }
     }
 }
