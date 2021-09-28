@@ -16,8 +16,6 @@ using TSM = Tekla.Structures.Model;
 using TSD = Tekla.Structures.Drawing;
 using System.Collections;
 using System.IO;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 using System.Linq;
 using System.Xml.Serialization;
 using System.Xml;
@@ -41,14 +39,23 @@ namespace WPFLimit
 
         private void Load()
         {
-            XDocument xdoc = XDocument.Load("save.xml");
-            w_main.Topmost = (bool)xdoc.Element("setting").Element("Поверх_окон");
-            w_main.Left = (double)xdoc.Element("setting").Element("Лево");
-            w_main.Top = (double)xdoc.Element("setting").Element("Верх");
+            XDocument xdoc = new XDocument();
+            if (File.Exists("save.xml"))
+            {
+                xdoc = XDocument.Load("save.xml");
+                w_main.Topmost = (bool)xdoc.Element("setting").Element("Поверх_окон");
+                w_main.Left = (double)xdoc.Element("setting").Element("Лево");
+                w_main.Top = (double)xdoc.Element("setting").Element("Верх");
 
-            XmlSerializer formatter = new XmlSerializer(typeof(List<string>));
-            List<string> f_temp = (List<string>)formatter.Deserialize(xdoc.Element("setting").Element("ArrayOfString").CreateReader());
-            save = f_temp;
+                XmlSerializer formatter = new XmlSerializer(typeof(List<string>));
+                List<string> f_temp = (List<string>)formatter.Deserialize(xdoc.Element("setting").Element("ArrayOfString").CreateReader());
+                save = f_temp;
+            }
+            else
+            {
+                MessageBox.Show("Проблема с файлом настроек");
+            }
+
 
             //MessageBox.Show(save.Remove("2; ").ToString());
 
