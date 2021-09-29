@@ -313,6 +313,12 @@ namespace WPFLimit
 
         private void lb_history_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
+            if (!InitializeDrawing())
+            {
+                MessageBox.Show("Чертеж не запущен :(");
+                return;
+            }
+
             string[] temp = history[lb_history.SelectedIndex].Split(';');
             tb_limit_up.Text = temp[0].Trim();
             tb_limit_down.Text = temp[1].Trim();
@@ -327,6 +333,12 @@ namespace WPFLimit
         }
         private void lb_save_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
+            if (!InitializeDrawing())
+            {
+                MessageBox.Show("Чертеж не запущен :(");
+                return;
+            }
+
             string[] temp = save[lb_save.SelectedIndex].Split(';');
             tb_limit_up.Text = temp[0].Trim();
             tb_limit_down.Text = temp[1].Trim();
