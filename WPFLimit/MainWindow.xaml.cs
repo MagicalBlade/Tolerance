@@ -1,22 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Xml.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using TSM = Tekla.Structures.Model;
 using TSD = Tekla.Structures.Drawing;
-using System.Collections;
 using System.IO;
-using System.Linq;
 using System.Xml.Serialization;
 using System.Xml;
 
@@ -33,13 +23,13 @@ namespace WPFLimit
         List<String> history = new List<string>();
         public MainWindow()
         {
-            List<string> save = new List<string>();
             InitializeComponent();
             Load();
         }
 
         private void Load()
         {
+            //Загрузка файла с настройками и сохраненными даными.
             XDocument xdoc = new XDocument();
             if (File.Exists("save.xml"))
             {
@@ -57,15 +47,11 @@ namespace WPFLimit
                 MessageBox.Show("Проблема с файлом настроек");
             }
 
-
-            //MessageBox.Show(save.Remove("2; ").ToString());
-
-
             foreach (var item in save)
             {
                 lb_save.Items.Add(SP_add(item, b_delete_Click));
             }
-
+            //Устанавливаю картинки для кнопки закрепления окна.
             if (w_main.Topmost)
             {
                 b_Topmost.Content = Resources["Image.Second"];
@@ -75,6 +61,7 @@ namespace WPFLimit
                 b_Topmost.Content = Resources["Image.First"];
             }
         }
+        //Проверка открыта модель или нет.
         private bool InitializeConnection()
         {
             TSM.Model _model = new TSM.Model();
@@ -88,7 +75,7 @@ namespace WPFLimit
                 return false;
             }
         }
-
+        //Проверка открыт чертеж или нет.
         private bool InitializeDrawing()
         {
             TSD.DrawingHandler _drawingHandler = new TSD.DrawingHandler();
@@ -111,15 +98,11 @@ namespace WPFLimit
                 this.Close();
             }
         }
+        //Логика работы кнопки "Допуск".
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if (!InitializeDrawing())
-            {
-                MessageBox.Show("Чертеж не запущен :(");
-                return;
-            }
             StraightDimension();
-
+            //Запись данных в историю, с отсевом дублирующих.
             if (lb_history.Items.Count == 0)
             {
                 history.Add(tb_limit_up.Text + "; " + tb_limit_down.Text);
@@ -134,18 +117,24 @@ namespace WPFLimit
                 }
             }
         }
-
+        //Основной метод работы с размером.
         private void StraightDimension()
         {
+            if (!InitializeDrawing())
+            {
+                MessageBox.Show("Чертеж не запущен :(");
+                return;
+            }
             TSD.Drawing drawing = drawingHandler.GetActiveDrawing();
+            //Перебор выделенных объектов с поиском размеров.
             foreach (TSD.DrawingObject drawingObject in drawingHandler.GetDrawingObjectSelector().GetSelected())
             {
                 if (drawingObject is TSD.StraightDimension)
                 {
-                    TSD.StraightDimension straightDimension = drawingObject as TSD.StraightDimension;
+                    TSD.StraightDimension straightDimension = drawingObject as TSD.StraightDimension; //Найден одиночный размер, то что нам надо.
                     Prefix(straightDimension);
                 }
-
+                //Если найдена цепочка размеров, то ведем переборку по одиночным размерам из которых она состоит.
                 if (drawingObject is TSD.StraightDimensionSet)
                 {
                     TSD.StraightDimensionSet straightDimensionSet = drawingObject as TSD.StraightDimensionSet;
@@ -153,17 +142,18 @@ namespace WPFLimit
                     while (drawingObjectEnumerator.MoveNext())
                         if (drawingObjectEnumerator.Current is TSD.StraightDimension)
                         {
-                            TSD.StraightDimension straightDimension = drawingObjectEnumerator.Current as TSD.StraightDimension;
+                            TSD.StraightDimension straightDimension = drawingObjectEnumerator.Current as TSD.StraightDimension; //Найден одиночный размер, то что нам надо.
                             Prefix(straightDimension);
                         }
                 }
             }
-            drawing.CommitChanges();
+            drawing.CommitChanges(); //Важно. Фиксируем изменения в чертеже.
         }
+        //Метод передающий даные в префикс размера.
        private void Prefix(TSD.StraightDimension straightDimension)
         {
             TSD.ContainerElement containerElement = new TSD.ContainerElement();
-            TSD.ContainerElement cE_return = new TSD.ContainerElement();
+            TSD.ContainerElement cE_return = new TSD.ContainerElement(); //Пустой контейнер. Нужен для уменьшения интервала от значения размера до допусков.
             TSD.NewLineElement newLineElement = new TSD.NewLineElement();
             TSD.FontAttributes fontAttributes = new TSD.FontAttributes
             {
@@ -220,6 +210,7 @@ namespace WPFLimit
             straightDimension.Modify();
         }
 
+        //Метод создающий строку для списком истории и сохранения. В зависимости от списка меняется методо кнопки находящейся в строке.
         private StackPanel SP_add(string text, RoutedEventHandler routedEventHandler)
         {
             Button b_save = new Button();
@@ -235,7 +226,7 @@ namespace WPFLimit
             stackPanel.Children.Add(l_save);
             return stackPanel;
         }
-
+        //При переключении между ячейками будет выделяться весь текст находящийся в них.
         private void tb_limit_up_GotFocus(object sender, RoutedEventArgs e)
         {
             tb_limit_up.SelectAll();
@@ -245,7 +236,7 @@ namespace WPFLimit
         {
             tb_limit_down.SelectAll();
         }
-
+        //Передача фокуса по кнопке Enter.
         private void tb_limit_up_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
@@ -269,17 +260,17 @@ namespace WPFLimit
                 tb_limit_up.Focus();
             }
         }
-
+        //При запуске приложения, а также при переключении на него, фокус будет передаваться первом полю ввода (Верх).
         private void Window_Activated(object sender, EventArgs e)
         {
             tb_limit_up.Focus();
         }
-
+        //Окно можно перемещать схватившись за любое место окна.
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             this.DragMove();
         }
-
+        //Кнопка фиксирет окно по верх всех окон.
         private void b_Topmost_Click(object sender, RoutedEventArgs e)
         {
             if (!w_main.Topmost)
@@ -296,6 +287,7 @@ namespace WPFLimit
 
         private void w_main_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            //Запись настроек и данных в файл.
             XDocument xdoc = new XDocument();
             xdoc.Add(new XElement("setting",
                 new XElement("Поверх_окон", w_main.Topmost),
@@ -313,37 +305,36 @@ namespace WPFLimit
 
         private void lb_history_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            if (!InitializeDrawing())
+            if (lb_history.SelectedIndex != -1)//Отключение активации двойным кликом по кнопке сохранения.
             {
-                MessageBox.Show("Чертеж не запущен :(");
-                return;
+                string[] temp = history[lb_history.SelectedIndex].Split(';');
+                tb_limit_up.Text = temp[0].Trim();
+                tb_limit_down.Text = temp[1].Trim();
+                StraightDimension();
             }
-
-            string[] temp = history[lb_history.SelectedIndex].Split(';');
-            tb_limit_up.Text = temp[0].Trim();
-            tb_limit_down.Text = temp[1].Trim();
-            StraightDimension();
         }
-
+        //Сохраняем строку из истории.
         private void b_save_Click(object sender, RoutedEventArgs e)
         {
             Button button = sender as Button;
-            lb_save.Items.Add(SP_add(button.Tag.ToString(), b_delete_Click));
-            save.Add(button.Tag.ToString());
+            if (save.IndexOf(button.Tag.ToString()) == -1)
+            {
+                lb_save.Items.Add(SP_add(button.Tag.ToString(), b_delete_Click));
+                save.Add(button.Tag.ToString());
+            }
+
         }
         private void lb_save_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            if (!InitializeDrawing())
+            if (lb_save.SelectedIndex != -1) //Отключение активации двойным кликом по кнопке удаления.
             {
-                MessageBox.Show("Чертеж не запущен :(");
-                return;
+                string[] temp = save[lb_save.SelectedIndex].Split(';');
+                tb_limit_up.Text = temp[0].Trim();
+                tb_limit_down.Text = temp[1].Trim();
+                StraightDimension();
             }
-
-            string[] temp = save[lb_save.SelectedIndex].Split(';');
-            tb_limit_up.Text = temp[0].Trim();
-            tb_limit_down.Text = temp[1].Trim();
-            StraightDimension();
         }
+        //Удаление из истории.
         private void b_delete_Click(object sender, RoutedEventArgs e)
         {
             Button button = sender as Button;
