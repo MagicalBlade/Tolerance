@@ -8,6 +8,7 @@
     <Window.Resources>
         <Image x:Key="Image.First" Source="открепить.png"/>
         <Image x:Key="Image.Second" Source="прикрепить.png"/>
+        <Image x:Key="Image.Save" Source="save.png"/>
     </Window.Resources>
     <Grid>
         <Button x:Name="b_limit" Content="Допуск" Margin="50,119,50,0" VerticalAlignment="Top" Click="Button_Click" KeyDown="b_limit_KeyDown" RenderTransformOrigin="0.504,0.229"/>
@@ -22,7 +23,7 @@
                     <ListBox x:Name="lb_history" MouseDoubleClick="lb_history_MouseDoubleClick" FontSize="16" Margin="0"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="Save" FontSize="16">
+            <TabItem Header="Сохраненные" FontSize="16">
                 <Grid Background="#FFE5E5E5">
                     <ListBox x:Name="lb_save" MouseDoubleClick="lb_save_MouseDoubleClick" FontSize="16" Margin="0"/>
                 </Grid>

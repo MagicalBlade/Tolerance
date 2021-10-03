@@ -21,6 +21,8 @@ namespace WPFLimit
         TSD.DrawingHandler drawingHandler;
         List<String> save = new List<string>();
         List<String> history = new List<string>();
+        Button b_delete = new Button();
+        Button b_save = new Button();
         public MainWindow()
         {
             InitializeComponent();
@@ -49,16 +51,18 @@ namespace WPFLimit
 
             foreach (var item in save)
             {
-                lb_save.Items.Add(SP_add(item, b_delete_Click));
+                lb_save.Items.Add(SP_add(item, b_delete_Click, "Удалить"));
             }
             //Устанавливаю картинки для кнопки закрепления окна.
             if (w_main.Topmost)
             {
                 b_Topmost.Content = Resources["Image.Second"];
+                b_Topmost.ToolTip = "Убрать фиксацию поверх всех окон";
             }
             else
             {
                 b_Topmost.Content = Resources["Image.First"];
+                b_Topmost.ToolTip = "Зафиксировать поверх всех окон";
             }
         }
         //Проверка открыта модель или нет.
@@ -106,14 +110,14 @@ namespace WPFLimit
             if (lb_history.Items.Count == 0)
             {
                 history.Add(tb_limit_up.Text + "; " + tb_limit_down.Text);
-                lb_history.Items.Add(SP_add(tb_limit_up.Text + "; " + tb_limit_down.Text, b_save_Click));
+                lb_history.Items.Add(SP_add(tb_limit_up.Text + "; " + tb_limit_down.Text, b_save_Click, "Сохранить"));
             }
             else
             {
                 if (history.IndexOf(tb_limit_up.Text + "; " + tb_limit_down.Text) == -1)
                 {
                     history.Add(tb_limit_up.Text + "; " + tb_limit_down.Text);
-                    lb_history.Items.Add(SP_add(tb_limit_up.Text + "; " + tb_limit_down.Text, b_save_Click));
+                    lb_history.Items.Add(SP_add(tb_limit_up.Text + "; " + tb_limit_down.Text, b_save_Click, "Сохранить"));
                 }
             }
         }
@@ -210,16 +214,18 @@ namespace WPFLimit
             straightDimension.Modify();
         }
 
-        //Метод создающий строку для списком истории и сохранения. В зависимости от списка меняется методо кнопки находящейся в строке.
-        private StackPanel SP_add(string text, RoutedEventHandler routedEventHandler)
+        //Метод создающий строку для списком истории и сохранения. В зависимости от списка меняется метод кнопки находящейся в строке.
+        private StackPanel SP_add(string text, RoutedEventHandler routedEventHandler, string tooltip)
         {
+            
             Button b_save = new Button();
             Label l_save = new Label();
-            l_save.Content = text;
             b_save.Height = 15;
             b_save.Width = 15;
             b_save.Click += routedEventHandler;
             b_save.Tag = text;
+            b_save.ToolTip = tooltip;
+            l_save.Content = text;
             StackPanel stackPanel = new StackPanel();
             stackPanel.Orientation = Orientation.Horizontal;
             stackPanel.Children.Add(b_save);
@@ -277,11 +283,13 @@ namespace WPFLimit
             {
                 w_main.Topmost = true;
                 b_Topmost.Content = Resources["Image.Second"];
+                b_Topmost.ToolTip = "Убрать фиксацию поверх всех окон";
             }
             else
             {
                 w_main.Topmost = false;
                 b_Topmost.Content = Resources["Image.First"];
+                b_Topmost.ToolTip = "Зафиксировать поверх всех окон";
             }
         }
 
@@ -319,7 +327,7 @@ namespace WPFLimit
             Button button = sender as Button;
             if (save.IndexOf(button.Tag.ToString()) == -1)
             {
-                lb_save.Items.Add(SP_add(button.Tag.ToString(), b_delete_Click));
+                lb_save.Items.Add(SP_add(button.Tag.ToString(), b_delete_Click, "Удалить"));
                 save.Add(button.Tag.ToString());
             }
 
