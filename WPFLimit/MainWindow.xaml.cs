@@ -21,8 +21,6 @@ namespace WPFLimit
         TSD.DrawingHandler drawingHandler;
         List<String> save = new List<string>();
         List<String> history = new List<string>();
-        Button b_delete = new Button();
-        Button b_save = new Button();
         public MainWindow()
         {
             InitializeComponent();
@@ -51,7 +49,7 @@ namespace WPFLimit
 
             foreach (var item in save)
             {
-                lb_save.Items.Add(SP_add(item, b_delete_Click, "Удалить"));
+                lb_save.Items.Add(SP_add(item, b_delete_Click, "Удалить", "Image.Delete"));
             }
             //Устанавливаю картинки для кнопки закрепления окна.
             if (w_main.Topmost)
@@ -110,14 +108,14 @@ namespace WPFLimit
             if (lb_history.Items.Count == 0)
             {
                 history.Add(tb_limit_up.Text + "; " + tb_limit_down.Text);
-                lb_history.Items.Add(SP_add(tb_limit_up.Text + "; " + tb_limit_down.Text, b_save_Click, "Сохранить"));
+                lb_history.Items.Add(SP_add(tb_limit_up.Text + "; " + tb_limit_down.Text, b_save_Click, "Сохранить", "Image.Save"));
             }
             else
             {
                 if (history.IndexOf(tb_limit_up.Text + "; " + tb_limit_down.Text) == -1)
                 {
                     history.Add(tb_limit_up.Text + "; " + tb_limit_down.Text);
-                    lb_history.Items.Add(SP_add(tb_limit_up.Text + "; " + tb_limit_down.Text, b_save_Click, "Сохранить"));
+                    lb_history.Items.Add(SP_add(tb_limit_up.Text + "; " + tb_limit_down.Text, b_save_Click, "Сохранить", "Image.Save"));
                 }
             }
         }
@@ -215,7 +213,7 @@ namespace WPFLimit
         }
 
         //Метод создающий строку для списком истории и сохранения. В зависимости от списка меняется метод кнопки находящейся в строке.
-        private StackPanel SP_add(string text, RoutedEventHandler routedEventHandler, string tooltip)
+        private StackPanel SP_add(string text, RoutedEventHandler routedEventHandler, string tooltip, string icon)
         {
             
             Button b_save = new Button();
@@ -225,6 +223,7 @@ namespace WPFLimit
             b_save.Click += routedEventHandler;
             b_save.Tag = text;
             b_save.ToolTip = tooltip;
+            b_save.Content = this.FindResource(icon);
             l_save.Content = text;
             StackPanel stackPanel = new StackPanel();
             stackPanel.Orientation = Orientation.Horizontal;
@@ -327,7 +326,7 @@ namespace WPFLimit
             Button button = sender as Button;
             if (save.IndexOf(button.Tag.ToString()) == -1)
             {
-                lb_save.Items.Add(SP_add(button.Tag.ToString(), b_delete_Click, "Удалить"));
+                lb_save.Items.Add(SP_add(button.Tag.ToString(), b_delete_Click, "Удалить", "Image.Delete"));
                 save.Add(button.Tag.ToString());
             }
 
