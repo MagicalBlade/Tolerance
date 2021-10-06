@@ -37,17 +37,14 @@ namespace WPFLimit
                 w_main.Topmost = (bool)xdoc.Element("setting").Element("Поверх_окон");
                 w_main.Left = (double)xdoc.Element("setting").Element("Лево");
                 w_main.Top = (double)xdoc.Element("setting").Element("Верх");
+                w_main.Height = (double)xdoc.Element("setting").Element("Высота");
 
                 XmlSerializer formatter = new XmlSerializer(typeof(List<string>));
                 List<string> f_temp = (List<string>)formatter.Deserialize(xdoc.Element("setting").Element("ArrayOfString").CreateReader());
                 save = f_temp;
             }
-            else
-            {
-                MessageBox.Show("Проблема с файлом настроек");
-            }
 
-            foreach (var item in save)
+            foreach (string item in save)
             {
                 lb_save.Items.Add(SP_add(item, b_delete_Click, "Удалить", "Image.Delete"));
             }
@@ -299,7 +296,8 @@ namespace WPFLimit
             xdoc.Add(new XElement("setting",
                 new XElement("Поверх_окон", w_main.Topmost),
                 new XElement("Лево", w_main.Left),
-                new XElement("Верх", w_main.Top)));
+                new XElement("Верх", w_main.Top),
+                new XElement("Высота", w_main.Height)));
             XmlSerializer formatter = new XmlSerializer(typeof(List<string>));
             XDocument xdoc1 = new XDocument();
             using (XmlWriter fs = xdoc1.CreateWriter())
@@ -347,6 +345,13 @@ namespace WPFLimit
             Button button = sender as Button;
             lb_save.Items.Remove(button.Parent);
             save.Remove(button.Tag.ToString());
+        }
+
+        private void b_clear_Click(object sender, RoutedEventArgs e)
+        {
+            tb_limit_up.Text = "";
+            tb_limit_down.Text = "";
+            StraightDimension();
         }
     }
 }

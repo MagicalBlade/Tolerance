@@ -36,6 +36,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>plus_minus.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=5.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.5.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
@@ -126,9 +129,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="plus_minus-48_44524.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="открепить.png" />
     <Resource Include="прикрепить.png" />
   </ItemGroup>
@@ -143,6 +143,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="clear.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="plus_minus.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
