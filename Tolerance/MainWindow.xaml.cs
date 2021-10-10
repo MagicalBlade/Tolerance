@@ -10,7 +10,7 @@ using System.IO;
 using System.Xml.Serialization;
 using System.Xml;
 
-namespace WPFLimit
+namespace Tolerance
 {
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml

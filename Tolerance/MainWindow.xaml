@@ -1,9 +1,9 @@
-﻿<Window x:Name="w_main" x:Class="WPFLimit.MainWindow"
+﻿<Window x:Name="w_main" x:Class="Tolerance.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WPFLimit"
+        xmlns:local="clr-namespace:Tolerance"
         mc:Ignorable="d" Height="333" Width="200" Loaded="Window_Loaded" FontFamily="GOST type A" Activated="Window_Activated" MouseLeftButtonDown="Window_MouseLeftButtonDown" Closing="w_main_Closing" MaxWidth="200" MinHeight="300" MinWidth="200">
     <Window.Resources>
         <Image x:Key="Image.First" Source="открепить.png"/>
