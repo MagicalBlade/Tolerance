@@ -71,6 +71,10 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="Tekla.Structures, Version=2020.0.0.0, Culture=neutral, PublicKeyToken=2f04dbe497b71114, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>D:\Program Files\Tekla Structures\2020.0\nt\bin\plugins\Tekla.Structures.dll</HintPath>
+    </Reference>
     <Reference Include="Tekla.Structures.Drawing, Version=2020.0.0.0, Culture=neutral, PublicKeyToken=2f04dbe497b71114, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\..\..\Program Files\Tekla Structures\2019.1\nt\bin\plugins\Tekla.Structures.Drawing.dll</HintPath>

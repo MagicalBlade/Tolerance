@@ -21,6 +21,7 @@ namespace WPFLimit
         TSD.DrawingHandler drawingHandler;
         List<String> save = new List<string>();
         List<String> history = new List<string>();
+        string xsdatadir = "";
         public MainWindow()
         {
             InitializeComponent();
@@ -30,20 +31,25 @@ namespace WPFLimit
         private void Load()
         {
             //Загрузка файла с настройками и сохраненными даными.
+
+            Tekla.Structures.TeklaStructuresSettings.GetAdvancedOption("XSDATADIR", ref xsdatadir);
+            xsdatadir += "Environments\\common\\macros\\drawings\\WPFLimit\\save.xml";
             XDocument xdoc = new XDocument();
-            if (File.Exists("save.xml"))
+            if (File.Exists(xsdatadir))
             {
-                xdoc = XDocument.Load("save.xml");
+                xdoc = XDocument.Load(xsdatadir);
                 w_main.Topmost = (bool)xdoc.Element("setting").Element("Поверх_окон");
                 w_main.Left = (double)xdoc.Element("setting").Element("Лево");
                 w_main.Top = (double)xdoc.Element("setting").Element("Верх");
                 w_main.Height = (double)xdoc.Element("setting").Element("Высота");
-
                 XmlSerializer formatter = new XmlSerializer(typeof(List<string>));
                 List<string> f_temp = (List<string>)formatter.Deserialize(xdoc.Element("setting").Element("ArrayOfString").CreateReader());
                 save = f_temp;
             }
-
+            else
+            {
+                MessageBox.Show("Файл не грузится");
+            }
             foreach (string item in save)
             {
                 lb_save.Items.Add(SP_add(item, b_delete_Click, "Удалить", "Image.Delete"));
@@ -305,7 +311,7 @@ namespace WPFLimit
                 formatter.Serialize(fs, save);
             }
             xdoc.Root.Add(xdoc1.Root);
-            xdoc.Save("save.xml");
+            xdoc.Save(xsdatadir);
         }
 
         private void lb_history_MouseDoubleClick(object sender, MouseButtonEventArgs e)
