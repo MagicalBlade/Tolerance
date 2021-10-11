@@ -22,8 +22,10 @@ namespace Tolerance
         List<String> save = new List<string>();
         List<String> history = new List<string>();
         string xsdatadir = "";
+
         public MainWindow()
         {
+            
             InitializeComponent();
             Load();
         }
