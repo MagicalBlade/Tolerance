@@ -17,7 +17,7 @@ namespace Tolerance
     /// </summary>
     public partial class MainWindow : Window
     {
-        TSM.Model model;
+        TSM.Model model = new TSM.Model();
         TSD.DrawingHandler drawingHandler;
         List<String> save = new List<string>();
         List<String> history = new List<string>();
@@ -25,7 +25,6 @@ namespace Tolerance
 
         public MainWindow()
         {
-            
             InitializeComponent();
             Load();
         }
@@ -68,20 +67,7 @@ namespace Tolerance
                 b_Topmost.ToolTip = "Зафиксировать поверх всех окон";
             }
         }
-        //Проверка открыта модель или нет.
-        private bool InitializeConnection()
-        {
-            TSM.Model _model = new TSM.Model();
-            if(_model.GetConnectionStatus())
-            {
-                model = _model;
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
+
         //Проверка открыт чертеж или нет.
         private bool InitializeDrawing()
         {
@@ -99,11 +85,7 @@ namespace Tolerance
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            if (!InitializeConnection())
-            {
-                MessageBox.Show("Нет конекта к модели :(");
-                this.Close();
-            }
+
         }
         //Логика работы кнопки "Допуск".
         private void Button_Click(object sender, RoutedEventArgs e)
