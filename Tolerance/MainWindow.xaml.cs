@@ -39,13 +39,28 @@ namespace Tolerance
             if (File.Exists(xsdatadir))
             {
                 xdoc = XDocument.Load(xsdatadir);
-                w_main.Topmost = (bool)xdoc.Element("setting").Element("Поверх_окон");
-                w_main.Left = (double)xdoc.Element("setting").Element("Лево");
-                w_main.Top = (double)xdoc.Element("setting").Element("Верх");
-                w_main.Height = (double)xdoc.Element("setting").Element("Высота");
-                XmlSerializer formatter = new XmlSerializer(typeof(List<string>));
-                List<string> f_temp = (List<string>)formatter.Deserialize(xdoc.Element("setting").Element("ArrayOfString").CreateReader());
-                save = f_temp;
+                if (xdoc.Element("setting").Element("Поверх_окон") != null)
+                {
+                    w_main.Topmost = (bool)xdoc.Element("setting").Element("Поверх_окон");
+                }
+                if (xdoc.Element("setting").Element("Лево") != null)
+                {
+                    w_main.Left = (double)xdoc.Element("setting").Element("Лево");
+                }
+                if (xdoc.Element("setting").Element("Верх") != null)
+                {
+                    w_main.Top = (double)xdoc.Element("setting").Element("Верх");
+                }
+                if (xdoc.Element("setting").Element("Высота") != null)
+                {
+                    w_main.Height = (double)xdoc.Element("setting").Element("Высота");
+                }
+                if (xdoc.Element("setting").Element("ArrayOfString") != null)
+                {
+                    XmlSerializer formatter = new XmlSerializer(typeof(List<string>));
+                    List<string> f_temp = (List<string>)formatter.Deserialize(xdoc.Element("setting").Element("ArrayOfString").CreateReader());
+                    save = f_temp;
+                }
             }
             else
             {
