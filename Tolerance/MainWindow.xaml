@@ -11,6 +11,7 @@
         <Image x:Key="Image.Clear" Source="clear.png"/>
         <Image x:Shared="False" x:Key="Image.Save" Source="save.png"/>
         <Image x:Shared="False" x:Key="Image.Delete" Source="delete.png"/>
+        <Image x:Shared="False" x:Key="Image.Pm" Source="plus_minus.ico"/>
     </Window.Resources>
     <Grid>
         <Button x:Name="b_limit" Content="Допуск" Margin="50,119,50,0" VerticalAlignment="Top" Click="Button_Click" KeyDown="b_limit_KeyDown" RenderTransformOrigin="0.504,0.229"/>
@@ -32,6 +33,7 @@
             </TabItem>
         </TabControl>
         <Button x:Name="b_clear" Content="{StaticResource Image.Clear}" ToolTip="Очистить допуск" Margin="0" Click="b_clear_Click" HorizontalAlignment="Right" Width="29" Height="29" VerticalAlignment="Top"/>
+        <Button x:Name="b_plus_minus" Content="{StaticResource Image.Pm}" ToolTip="Берётся верхнее значение" Margin="0,52,13,0" RenderTransformOrigin="0.724,0.444" Width="25" Height="24" VerticalAlignment="Top" HorizontalAlignment="Right" Click="b_plus_minus_Click"/>
 
     </Grid>
 </Window>

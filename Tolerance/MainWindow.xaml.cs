@@ -358,5 +358,12 @@ namespace Tolerance
             tb_limit_down.Text = "";
             StraightDimension();
         }
+
+        private void b_plus_minus_Click(object sender, RoutedEventArgs e)
+        {
+            tb_limit_down.Text = "-" + tb_limit_up.Text;
+            tb_limit_up.Text = "+" + tb_limit_up.Text;
+            Button_Click(sender, e);
+        }
     }
 }
