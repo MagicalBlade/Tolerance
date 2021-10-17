@@ -32,7 +32,6 @@ namespace Tolerance
         private void Load()
         {
             //Загрузка файла с настройками и сохраненными даными.
-
             Tekla.Structures.TeklaStructuresSettings.GetAdvancedOption("XSDATADIR", ref xsdatadir);
             xsdatadir += "Environments\\common\\macros\\drawings\\Tolerance\\save.xml";
             XDocument xdoc = new XDocument();
@@ -61,10 +60,6 @@ namespace Tolerance
                     List<string> f_temp = (List<string>)formatter.Deserialize(xdoc.Element("setting").Element("ArrayOfString").CreateReader());
                     save = f_temp;
                 }
-            }
-            else
-            {
-                MessageBox.Show("Файл не грузится");
             }
             foreach (string item in save)
             {
