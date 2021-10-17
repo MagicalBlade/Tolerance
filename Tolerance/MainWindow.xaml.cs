@@ -351,8 +351,9 @@ namespace Tolerance
 
         private void b_plus_minus_Click(object sender, RoutedEventArgs e)
         {
-            tb_limit_down.Text = "-" + tb_limit_up.Text;
-            tb_limit_up.Text = "+" + tb_limit_up.Text;
+            string temp = tb_limit_up.Text.Trim(new Char[] { '+', '-' });
+            tb_limit_down.Text = "-" + temp;
+            tb_limit_up.Text = "+" + temp;
             Button_Click(sender, e);
         }
     }
