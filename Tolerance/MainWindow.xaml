@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Tolerance"
-        mc:Ignorable="d" Height="333" Width="200" Loaded="Window_Loaded" FontFamily="GOST type A" Activated="Window_Activated" MouseLeftButtonDown="Window_MouseLeftButtonDown" Closing="w_main_Closing" MaxWidth="200" MinHeight="300" MinWidth="200">
+        mc:Ignorable="d" Height="333" Width="200" Loaded="Window_Loaded" FontFamily="GOST type A" MouseLeftButtonDown="Window_MouseLeftButtonDown" Closing="w_main_Closing" MaxWidth="200" MinHeight="300" MinWidth="200">
     <Window.Resources>
         <Image x:Key="Image.First" Source="открепить.png"/>
         <Image x:Key="Image.Second" Source="прикрепить.png"/>
@@ -14,19 +14,19 @@
         <Image x:Shared="False" x:Key="Image.Pm" Source="plus_minus.ico"/>
     </Window.Resources>
     <Grid>
-        <Button x:Name="b_limit" Content="Допуск" Margin="50,119,50,0" VerticalAlignment="Top" Click="Button_Click" KeyDown="b_limit_KeyDown" RenderTransformOrigin="0.504,0.229"/>
+        <Button x:Name="b_limit" Content="Допуск" Margin="50,119,50,0" VerticalAlignment="Top" Click="Button_Click" KeyDown="b_limit_KeyDown" RenderTransformOrigin="0.504,0.229" FontSize="16" FontFamily="GOST type B"/>
         <TextBox x:Name="tb_limit_up" Height="23" Margin="50,34,50,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" GotFocus="tb_limit_up_GotFocus" KeyDown="tb_limit_up_KeyDown" FontFamily="GOST type A Standard"/>
         <TextBox x:Name="tb_limit_down" Height="23" Margin="50,74,50,0" TextWrapping="Wrap" VerticalAlignment="Top" TouchEnter="Button_Click" FontSize="16" GotFocus="tb_limit_down_GotFocus" KeyDown="tb_limit_down_KeyDown" FontFamily="GOST type A Standard"/>
         <Label Content="Верх" HorizontalAlignment="Left" Margin="16,34,0,0" VerticalAlignment="Top" FontSize="14" Height="23"/>
         <Label Content="Низ" HorizontalAlignment="Left" Margin="16,74,0,0" VerticalAlignment="Top" Width="29" FontSize="14" Height="23"/>
         <Button x:Name="b_Topmost" Content="{StaticResource Image.First}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="29" RenderTransformOrigin="1,0" Click="b_Topmost_Click" Height="29" Focusable="False"/>
         <TabControl Margin="0,150,0,0">
-            <TabItem Header="История" FontSize="16">
+            <TabItem Header="История" FontSize="16" FontFamily="GOST type B">
                 <Grid Background="#FFE5E5E5">
                     <ListBox x:Name="lb_history" MouseDoubleClick="lb_history_MouseDoubleClick" FontSize="16" Margin="0"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="Сохраненные" FontSize="16">
+            <TabItem Header="Сохраненные" FontSize="16" FontFamily="GOST type B">
                 <Grid Background="#FFE5E5E5">
                     <ListBox x:Name="lb_save" MouseDoubleClick="lb_save_MouseDoubleClick" FontSize="16" Margin="0"/>
                 </Grid>
