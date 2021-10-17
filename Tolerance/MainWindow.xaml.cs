@@ -262,11 +262,6 @@ namespace Tolerance
                 tb_limit_up.Focus();
             }
         }
-        //При запуске приложения, а также при переключении на него, фокус будет передаваться первом полю ввода (Верх).
-        private void Window_Activated(object sender, EventArgs e)
-        {
-            tb_limit_up.Focus();
-        }
         //Окно можно перемещать схватившись за любое место окна.
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
