@@ -34,7 +34,7 @@ namespace Tolerance
             //Загрузка файла с настройками и сохраненными даными.
 
             Tekla.Structures.TeklaStructuresSettings.GetAdvancedOption("XSDATADIR", ref xsdatadir);
-            xsdatadir += "Environments\\common\\macros\\drawings\\WPFLimit\\save.xml";
+            xsdatadir += "Environments\\common\\macros\\drawings\\Tolerance\\save.xml";
             XDocument xdoc = new XDocument();
             if (File.Exists(xsdatadir))
             {
