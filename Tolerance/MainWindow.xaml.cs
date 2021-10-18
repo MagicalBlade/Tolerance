@@ -131,7 +131,7 @@ namespace Tolerance
                 if (drawingObject is TSD.StraightDimension)
                 {
                     TSD.StraightDimension straightDimension = drawingObject as TSD.StraightDimension; //Найден одиночный размер, то что нам надо.
-                    Prefix(straightDimension);
+                    Postfix(straightDimension);
                 }
                 //Если найдена цепочка размеров, то ведем переборку по одиночным размерам из которых она состоит.
                 if (drawingObject is TSD.StraightDimensionSet)
@@ -142,24 +142,19 @@ namespace Tolerance
                         if (drawingObjectEnumerator.Current is TSD.StraightDimension)
                         {
                             TSD.StraightDimension straightDimension = drawingObjectEnumerator.Current as TSD.StraightDimension; //Найден одиночный размер, то что нам надо.
-                            Prefix(straightDimension);
+                            Postfix(straightDimension);
                         }
                 }
             }
             drawing.CommitChanges(); //Важно. Фиксируем изменения в чертеже.
         }
-        //Метод передающий даные в префикс размера.
-       private void Prefix(TSD.StraightDimension straightDimension)
+        //Метод передающий даные в постфикс размера.
+       private void Postfix(TSD.StraightDimension straightDimension)
         {
             TSD.ContainerElement containerElement = new TSD.ContainerElement();
             TSD.ContainerElement cE_return = new TSD.ContainerElement(); //Пустой контейнер. Нужен для уменьшения интервала от значения размера до допусков.
             TSD.NewLineElement newLineElement = new TSD.NewLineElement();
-            TSD.FontAttributes fontAttributes = new TSD.FontAttributes
-            {
-                Name = "GOST type A",
-                Height = 3.5,
-                Color = TSD.DrawingColors.NewLine1
-            };
+            TSD.FontAttributes fontAttributes = straightDimension.GetDimensionSet().Attributes.Text.Font;
             if (tb_limit_up.Text == "0")
             {
                 tb_limit_up.Text = " 0";
