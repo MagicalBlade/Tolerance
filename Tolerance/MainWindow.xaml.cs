@@ -295,11 +295,7 @@ namespace Tolerance
                 formatter.Serialize(fs, save);
             }
             xdoc.Root.Add(xdoc1.Root);
-
-            if (File.Exists(xsdatadir))
-            {
-                xdoc.Save(xsdatadir);
-            }
+            xdoc.Save(xsdatadir);
         }
 
         private void lb_history_MouseDoubleClick(object sender, MouseButtonEventArgs e)
